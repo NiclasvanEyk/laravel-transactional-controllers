@@ -1,0 +1,67 @@
+{
+    "name": "niclas-van-eyk/laravel-transactional-routes",
+    "description": "Effortlessly wrap your controller actions with database transactions.",
+    "keywords": [
+        "niclas-van-eyk",
+        "laravel",
+        "laravel-transactional-routes"
+    ],
+    "homepage": "https://github.com/niclas-van-eyk/laravel-transactional-routes",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Niclas van Eyk",
+            "email": "niclas.eyk@gmail.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^8.1",
+        "illuminate/contracts": "^9.0",
+        "illuminate/database": "^9.0",
+        "illuminate/routing": "^9.5",
+        "laravel/serializable-closure": "^1.2"
+    },
+    "require-dev": {
+        "friendsofphp/php-cs-fixer": "^3.8",
+        "nunomaduro/collision": "^6.0",
+        "nunomaduro/larastan": "^2.0.1",
+        "orchestra/testbench": "^7.0",
+        "phpstan/extension-installer": "^1.1",
+        "phpstan/phpstan-deprecation-rules": "^1.0",
+        "phpstan/phpstan-phpunit": "^1.0",
+        "phpunit/phpunit": "^9.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "NiclasVanEyk\\TransactionalRoutes\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "NiclasVanEyk\\TransactionalRoutes\\Tests\\": "tests"
+        }
+    },
+    "scripts": {
+        "analyse": "vendor/bin/phpstan analyse",
+        "test": "vendor/bin/phpunit",
+        "fix-cs": "vendor/bin/php-cs-fixer fix --config=.php_cs.dist.php --allow-risky=yes",
+        "ci": ["@analyse", "@fix-cs", "@test"]
+    },
+    "config": {
+        "sort-packages": true,
+        "allow-plugins": {
+            "pestphp/pest-plugin": true,
+            "phpstan/extension-installer": true
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "NiclasVanEyk\\TransactionalRoutes\\TransactionalRoutesServiceProvider"
+            ]
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
