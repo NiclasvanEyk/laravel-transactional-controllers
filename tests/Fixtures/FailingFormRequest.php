@@ -1,6 +1,6 @@
 <?php
 
-namespace NiclasVanEyk\TransactionalRoutes\Tests\Fixtures;
+namespace NiclasVanEyk\TransactionalControllers\Tests\Fixtures;
 
 use Illuminate\Foundation\Http\FormRequest;
 

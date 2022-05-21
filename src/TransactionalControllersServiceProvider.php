@@ -1,11 +1,11 @@
 <?php
 
-namespace NiclasVanEyk\TransactionalRoutes;
+namespace NiclasVanEyk\TransactionalControllers;
 
 use Illuminate\Routing\Contracts\ControllerDispatcher;
 use Illuminate\Support\ServiceProvider;
 
-final class TransactionalRoutesServiceProvider extends ServiceProvider
+final class TransactionalControllersServiceProvider extends ServiceProvider
 {
     public function register()
     {

@@ -1,12 +1,13 @@
 {
-    "name": "niclas-van-eyk/laravel-transactional-routes",
+    "name": "niclas-van-eyk/laravel-transactional-controllers",
     "description": "Effortlessly wrap your controller actions with database transactions.",
     "keywords": [
         "niclas-van-eyk",
         "laravel",
-        "laravel-transactional-routes"
+        "database",
+        "transactions"
     ],
-    "homepage": "https://github.com/niclas-van-eyk/laravel-transactional-routes",
+    "homepage": "https://github.com/niclas-van-eyk/laravel-transactional-controllers",
     "license": "MIT",
     "authors": [
         {
@@ -34,12 +35,12 @@
     },
     "autoload": {
         "psr-4": {
-            "NiclasVanEyk\\TransactionalRoutes\\": "src"
+            "NiclasVanEyk\\TransactionalControllers\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "NiclasVanEyk\\TransactionalRoutes\\Tests\\": "tests"
+            "NiclasVanEyk\\TransactionalControllers\\Tests\\": "tests"
         }
     },
     "scripts": {
@@ -58,7 +59,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "NiclasVanEyk\\TransactionalRoutes\\TransactionalRoutesServiceProvider"
+                "NiclasVanEyk\\TransactionalControllers\\TransactionalControllersServiceProvider"
             ]
         }
     },

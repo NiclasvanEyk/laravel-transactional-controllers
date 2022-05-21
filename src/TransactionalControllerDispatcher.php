@@ -1,6 +1,6 @@
 <?php
 
-namespace NiclasVanEyk\TransactionalRoutes;
+namespace NiclasVanEyk\TransactionalControllers;
 
 use Illuminate\Database\ConnectionInterface;
 use Illuminate\Database\ConnectionResolverInterface;
@@ -23,7 +23,7 @@ final class TransactionalControllerDispatcher extends ControllerDispatcher
             $method
         );
 
-        $attribute = (new TransactionalRouteReflector($route))->attribute();
+        $attribute = TransactionalControllerReflector::attribute($route);
         if ($attribute === null) {
             return $this->callAction($controller, $method, $parameters);
         }

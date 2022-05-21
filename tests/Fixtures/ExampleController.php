@@ -1,8 +1,8 @@
 <?php
 
-namespace NiclasVanEyk\TransactionalRoutes\Tests\Fixtures;
+namespace NiclasVanEyk\TransactionalControllers\Tests\Fixtures;
 
-use NiclasVanEyk\TransactionalRoutes\Transactional;
+use NiclasVanEyk\TransactionalControllers\Transactional;
 
 class ExampleController
 {

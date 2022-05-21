@@ -1,3 +1,3 @@
 # Changelog
 
-All notable changes to `laravel-transactional-routes` will be documented in this file.
+All notable changes to `laravel-transactional-controllers` will be documented in this file.

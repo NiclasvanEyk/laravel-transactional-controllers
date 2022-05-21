@@ -1,12 +1,12 @@
 <?php
 
-namespace NiclasVanEyk\TransactionalRoutes\Tests\Support;
+namespace NiclasVanEyk\TransactionalControllers\Tests\Support;
 
 use Illuminate\Database\Events\TransactionBeginning;
 use Illuminate\Database\Events\TransactionCommitted;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Event;
-use NiclasVanEyk\TransactionalRoutes\Tests\TestCase;
+use NiclasVanEyk\TransactionalControllers\Tests\TestCase;
 
 /** @mixin TestCase */
 trait AssertsWhetherTransactionHappen

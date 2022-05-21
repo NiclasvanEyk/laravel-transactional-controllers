@@ -1,10 +1,9 @@
-
-# `#[Transactional]` Laravel Routes
+# `#[Transactional]` Laravel Controllers
 
 Effortlessly wrap your controller actions with database transactions.
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/niclas-van-eyk/laravel-transactional-routes.svg?style=flat-square)](https://packagist.org/packages/niclas-van-eyk/laravel-transactional-routes)
-[![Total Downloads](https://img.shields.io/packagist/dt/niclas-van-eyk/laravel-transactional-routes.svg?style=flat-square)](https://packagist.org/packages/niclas-van-eyk/laravel-transactional-routes)
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/niclas-van-eyk/laravel-transactional-controllers.svg?style=flat-square)](https://packagist.org/packages/niclas-van-eyk/laravel-transactional-controllers)
+[![Total Downloads](https://img.shields.io/packagist/dt/niclas-van-eyk/laravel-transactional-controllers.svg?style=flat-square)](https://packagist.org/packages/niclas-van-eyk/laravel-transactional-controllers)
 
 ```php
 class ExampleUsageController
@@ -25,7 +24,7 @@ class ExampleUsageController
 You can install the package via composer:
 
 ```bash
-composer require niclas-van-eyk/laravel-transactional-routes
+composer require niclas-van-eyk/laravel-transactional-controllers
 ```
 
 ## Background
@@ -59,14 +58,14 @@ class BankAccountController
 
 You have to wrap your whole code inside one big closure, explicitly `use` all parameters you inject, and if you want to return something from _inside_ the transaction closure, you end up with this double return, making the code harder to read and your IDE angry.
 
-`laravel-transactional-routes` solves this, by eliminating the need to wrap the code inside a closure and instead adding the `Transactional` attribute to the controller method:
+`laravel-transactional-controllers` solves this, by eliminating the need to wrap the code inside a closure and instead adding the `Transactional` attribute to the controller method:
 ```php
 namespace App\Http\Controllers;
 
 use App\Http\Requests\TransferMoneyRequest;
 use App\Models\TransferLog;
 use Illuminate\Http\Request;
-use NiclasVanEyk\TransactionalRoutes\Transactional; // <-- from this package
+use NiclasVanEyk\TransactionalControllers\Transactional; // <-- from this package
 
 class BankAccountController 
 {
@@ -83,22 +82,44 @@ class BankAccountController
 
 No more `use`, double `return`s or your IDE complaining about it not being able to guarantee a correct return type!
 
-You can also explicitly specify the database connection to use for running the transaction (`config('database.default` is used by default):
+You can also explicitly specify the database connection to use for running the transaction (`config('database.default')` is used by default):
 
 ```php
     #[Transactional(connection: 'other')]
     public function store() {}
 ```
 
+## Limitations
+
+This only works when using controllers:
+
+```php
+use NiclasVanEyk\TransactionalControllers\Transactional;
+
+// Works ✅
+class RegularController
+{
+    #[Transactional] public function store() {}
+}
+Route::post('/regular-store', [RegularController::class, 'store']);
+
+// Works ✅
+class InvokableController
+{
+    #[Transactional] public function __invoke() {}
+}
+Route::post('/invokable-store', InvokableController::class);
+
+// Does not work ❌
+Route::post('/invokable-store', #[Transactioal] function () {
+    // Will not open a transaction!
+})
+```
+
 ## Implementation Details
 
-This package uses Laravels lesser known [`ControllerDispatcher`](https://github.com/laravel/framework/blob/master/src/Illuminate/Routing/Contracts/ControllerDispatcher.php) component, which determines how the controller action should be executed. This means we can defer opening a transaction until the last possible moment, preventing **unnecessary transactions from being opened**! If e.g. the validation inside a `FormRequest` fails, or a model is not found when using route model binding, no transaction is started.
+This package uses Laravels [`ControllerDispatcher`](https://github.com/laravel/framework/blob/master/src/Illuminate/Routing/Contracts/ControllerDispatcher.php) component, which determines how the controller action should be executed. This means we can defer opening a transaction until the last possible moment, preventing **unnecessary transactions from being opened**! If e.g. the validation inside a `FormRequest` fails, or a model is not found when using route model binding, no transaction is started.
 
-## Testing
-
-```bash
-composer test
-```
 
 ## Changelog
 
@@ -106,11 +127,32 @@ Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed re
 
 ## Contributing
 
-Please see [CONTRIBUTING](https://github.com/spatie/.github/blob/main/CONTRIBUTING.md) for details.
+If you have any ideas for changes, feel free to open issues, PRs or fork the project.
 
-## Security Vulnerabilities
 
-Please review [our security policy](../../security/policy) on how to report security vulnerabilities.
+### Local Development
+
+This assumes you already have installed sqlite, PHP, and all composer dependencies locally.
+
+Run tests
+```bash
+composer test
+```
+
+Run formatter
+```bash
+composer fix-cs
+```
+
+Run analysis
+```bash
+composer analyse
+```
+
+Run all of the above at once
+```bash
+composer ci
+```
 
 ## Credits
 

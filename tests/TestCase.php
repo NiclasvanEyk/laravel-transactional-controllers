@@ -1,15 +1,15 @@
 <?php
 
-namespace NiclasVanEyk\TransactionalRoutes\Tests;
+namespace NiclasVanEyk\TransactionalControllers\Tests;
 
-use NiclasVanEyk\TransactionalRoutes\TransactionalRoutesServiceProvider;
+use NiclasVanEyk\TransactionalControllers\TransactionalControllersServiceProvider;
 use Orchestra\Testbench\TestCase as Orchestra;
 
 class TestCase extends Orchestra
 {
     protected function getPackageProviders($app)
     {
-        return [TransactionalRoutesServiceProvider::class];
+        return [TransactionalControllersServiceProvider::class];
     }
 
     public function getEnvironmentSetUp($app)
