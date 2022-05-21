@@ -14,7 +14,7 @@ class ExampleUsageController
         User::create();
         User::create();
 
-        throw \Exception("Everything will be rolled back!");
+        throw new Exception("Everything will be rolled back!");
     }
 }
 ```
