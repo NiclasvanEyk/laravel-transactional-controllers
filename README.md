@@ -9,10 +9,10 @@ Effortlessly wrap your controller actions with database transactions.
 class ExampleUsageController
 {
     #[Transactional]
-    public function demo()
+    public function demo(Request $request)
     {
-        User::create();
-        User::create();
+        User::create($request->all());
+        User::create($request->all());
 
         throw new Exception("Everything will be rolled back!");
     }
@@ -99,21 +99,25 @@ use NiclasVanEyk\TransactionalControllers\Transactional;
 // Works ✅
 class RegularController
 {
-    #[Transactional] public function store() {}
+    #[Transactional] 
+    public function store() {}
 }
 Route::post('/regular-store', [RegularController::class, 'store']);
 
 // Works ✅
 class InvokableController
 {
-    #[Transactional] public function __invoke() {}
+    #[Transactional]
+    public function __invoke() {}
 }
 Route::post('/invokable-store', InvokableController::class);
 
 // Does not work ❌
-Route::post('/invokable-store', #[Transactioal] function () {
-    // Will not open a transaction!
-})
+Route::post(
+    '/invokable-store', 
+    #[Transactional]
+    function () { /* Will not open a transaction! */},
+)
 ```
 
 ## Implementation Details
