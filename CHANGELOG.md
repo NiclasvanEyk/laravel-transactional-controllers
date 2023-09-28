@@ -2,7 +2,7 @@
 
 All notable changes to `laravel-transactional-controllers` will be documented in this file.
 
-## [Unreleased]
+## [0.2.1] - 2023-09-28
 
 ### Added
 
