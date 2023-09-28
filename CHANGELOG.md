@@ -4,6 +4,10 @@ All notable changes to `laravel-transactional-controllers` will be documented in
 
 ## [Unreleased]
 
+### Added
+
+- support for laravel 10
+
 ## [0.2.0]
 
 ### Removed
